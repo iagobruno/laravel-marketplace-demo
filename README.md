@@ -1,6 +1,6 @@
-# laravel-internal-coin-system
+# laravel-marketplace-demo
 
-A demo system where users can buy coins to purchase products within the platform.
+Um simples brechó virtual para venda e compra de roupas feito com Laravel + [Stripe connect](https://stripe.com/br/connect).
 
 ## Run Locally
 
