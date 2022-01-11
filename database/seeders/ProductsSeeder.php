@@ -19,11 +19,11 @@ class ProductSeeder extends Seeder
         $otherUser = User::factory()->create();
 
         Product::factory(5)
-            ->for($user)
+            ->for($user, 'seller')
             ->create();
 
         Product::factory()
-            ->for($user)
+            ->for($user, 'seller')
             ->boughtBy($otherUser)
             ->create();
     }

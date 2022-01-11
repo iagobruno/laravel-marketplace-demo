@@ -18,14 +18,14 @@ class Product extends Model
         'description',
         'image_url',
         'price',
-        'user_id',
+        'seller_id',
         'buyer_id',
         'bought_at'
     ];
 
     protected $hidden = [];
 
-    public function user()
+    public function seller()
     {
         return $this->belongsTo(User::class);
     }
@@ -53,5 +53,14 @@ class Product extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    /**
+     * Get the route key for implict binding.
+     * @see https://laravel.com/docs/8.x/routing#implicit-binding
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
