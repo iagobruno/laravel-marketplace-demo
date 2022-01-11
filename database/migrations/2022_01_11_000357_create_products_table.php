@@ -20,6 +20,9 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->string('image_url');
             $table->unsignedInteger('price');
+            $table->unsignedInteger('discount')->nullable();
+            $table->string('condition');
+            $table->string('size')->nullable();
             $table->foreignId('seller_id')->constrained('users');
             $table->foreignId('buyer_id')->nullable()->constrained('users');
             $table->timestamp('bought_at')->nullable();

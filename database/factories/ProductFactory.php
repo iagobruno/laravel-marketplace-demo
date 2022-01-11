@@ -14,11 +14,18 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $price = $this->faker->numberBetween(30, 600) * 100;
+
         return [
             'title' => $this->faker->sentence(5),
-            'description' => $this->faker->paragraph(4, false),
+            'description' => $this->faker->paragraph(6, false),
             'image_url' => 'https://picsum.photos/seed/' . $this->faker->word() . '/640/640',
-            'price' => $this->faker->numberBetween(30, 600) * 100,
+            'price' => $price,
+            'discount' => $this->faker->boolean()
+                ? $this->faker->numberBetween(1_00, $price)
+                : null,
+            'size' => $this->faker->randomElement(['PP', 'P', 'M', 'G', 'GG', 'XG']),
+            'condition' => $this->faker->randomElement(['novo', 'seminovo', 'usado']),
         ];
     }
 

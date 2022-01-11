@@ -8,7 +8,12 @@
             <a href="{{ route('products.show', [$product->slug]) }}"
                 class="aspect-square rounded-md overflow-hidden relative group">
                 <div class="bg-white text-gray-900 text-sm rounded-md px-2 py-1 absolute top-2 right-2">
-                    {{ $product->formattedPrice }}
+                    @isset($product->discount)
+                        <span class="font-semibold text-green-500">{{ money($product->price - $product->discount) }}</span>
+                        <span class="text-xs line-through text-gray-400">{{ money($product->price) }}</span>
+                    @else
+                        <span class="">{{ money($product->price) }}</span>
+                    @endisset
                 </div>
                 <img src="{{ $product->image_url }}" loading="lazy" class="object-cover aspect-square">
                 <div

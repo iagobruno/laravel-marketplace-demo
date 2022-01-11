@@ -18,6 +18,9 @@ class Product extends Model
         'description',
         'image_url',
         'price',
+        'discount',
+        'condition',
+        'size',
         'seller_id',
         'buyer_id',
         'bought_at'
@@ -28,11 +31,6 @@ class Product extends Model
     public function seller()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getFormattedPriceAttribute()
-    {
-        return 'R$ ' . number_format($this->price / 100, 2, ',', '.');
     }
 
     /**
