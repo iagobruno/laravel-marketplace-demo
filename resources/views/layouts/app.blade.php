@@ -22,16 +22,10 @@
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        <header class="bg-white shadow">
-            <div class="max-w-5xl mx-auto py-5 px-4">
-                {{ $header }}
+        <main class="py-8">
+            <div class="max-w-5xl mx-auto px-4">
+                {{ $slot }}
             </div>
-        </header>
-
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
         </main>
     </div>
 </body>
