@@ -3,13 +3,11 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
     mode: 'jit',
 
-    purge: [
+    content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
-    darkMode: false, // or 'media' or 'class'
 
     theme: {
         extend: {
@@ -26,6 +24,7 @@ module.exports = {
     },
 
     plugins: [
-        require('@tailwindcss/forms')
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/aspect-ratio'),
     ],
 }
