@@ -18,7 +18,10 @@ use App\Http\Controllers\StripeController;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::resource('products', ProductController::class)->except(['index']);
+Route::resource('produto', ProductController::class)
+    ->middleware(['auth', 'only-sellers'])
+    ->except(['index', 'show']);
+Route::get('/produto/{product}', [ProductController::class, 'show'])->name('produto.show');
 
 Route::middleware('auth')->group(function () {
     Route::view('/stripe/setup', 'setup-stripe')->name('stripe.setup');
@@ -26,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/stripe/callback', [StripeController::class, 'callback'])->name('stripe.callback');
     Route::get('/stripe/dashboard', [StripeController::class, 'dashboard'])->name('stripe.dashboard');
 });
+
 
 
 require __DIR__ . '/auth.php';
