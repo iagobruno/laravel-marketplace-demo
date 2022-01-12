@@ -17,9 +17,11 @@ class User extends Authenticatable
     use StripeMethods;
 
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'is_seller',
         'stripe_customer_id',
         'stripe_account_id',
         'stripe_payment_method_id',
@@ -40,5 +42,10 @@ class User extends Authenticatable
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }

@@ -15,10 +15,12 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_seller')->default(false);
 
             $table->string('stripe_customer_id')->nullable()->comment('Stripe customer ID storing the payment sources');
             $table->string('stripe_account_id')->nullable()->comment('Stripe account ID to send payments obtained with Stripe Connect');
