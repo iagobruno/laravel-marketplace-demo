@@ -18,13 +18,17 @@ class ProductController extends Controller
 
     public function create()
     {
-        Gate::allows('manage-products');
+        Gate::authorize('create', Product::class);
 
-        return view('products.create');
+        return view('products.edit', [
+            'editMode' => false
+        ]);
     }
 
     public function store(StoreProductRequest $request)
     {
+        Gate::authorize('create', Product::class);
+
         $product = Product::create([
             ...$request->validated(),
             'seller_id' => auth()->id(),
@@ -34,19 +38,28 @@ class ProductController extends Controller
         return redirect()->route('produto.show', [$product]);
     }
 
-    public function edit(Product $product)
+    public function edit(Product $product, Request $request)
     {
-        Gate::allows('manage-products');
+        Gate::authorize('update', $product);
+
+        return view('products.edit', [
+            'product' => $product,
+            'editMode' => true
+        ]);
     }
 
-    public function update(Product $product, Request $request)
+    public function update(Product $product, StoreProductRequest $request)
     {
-        //
+        Gate::authorize('update', $product);
+
+        $product->update($request->validated());
+
+        return redirect()->route('produto.show', $product)->withoutFragment();
     }
 
     public function destroy(Product $product)
     {
-        Gate::allows('manage-products');
+        Gate::authorize('delete', $product);
 
         $product->delete();
 

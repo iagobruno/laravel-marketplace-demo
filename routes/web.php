@@ -18,10 +18,12 @@ use App\Http\Controllers\StripeController;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::resource('produto', ProductController::class)
-    ->middleware(['auth', 'only-sellers'])
-    ->except(['index', 'show']);
+Route::get('/produto/criar', [ProductController::class, 'create'])->middleware(['auth', 'only-sellers'])->name('produto.create');
 Route::get('/produto/{product}', [ProductController::class, 'show'])->name('produto.show');
+Route::post('/produto', [ProductController::class, 'store'])->middleware(['auth', 'only-sellers'])->name('produto.store');
+Route::get('/produto/{product}/editar', [ProductController::class, 'edit'])->middleware(['auth', 'only-sellers'])->name('produto.edit');
+Route::put('/produto/{product}', [ProductController::class, 'update'])->middleware(['auth', 'only-sellers'])->name('produto.update');
+Route::delete('/produto/{product}', [ProductController::class, 'destroy'])->middleware(['auth', 'only-sellers'])->name('produto.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::view('/stripe/setup', 'setup-stripe')->name('stripe.setup');

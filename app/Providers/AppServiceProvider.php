@@ -26,11 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         \Carbon\Carbon::setLocale('pt_BR');
 
-        Route::resourceVerbs([
-            'create' => __('criar'),
-            'edit' => __('editar'),
-        ]);
-
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
     }
 }
