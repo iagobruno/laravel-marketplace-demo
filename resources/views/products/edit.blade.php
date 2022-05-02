@@ -1,10 +1,10 @@
 <x-app-layout>
     <h2 class="mb-4 text-3xl font-semibold leading-tight text-gray-800">
-        @isset($editMode)
+        @if ($editMode === true)
             {{ __('Editar produto') }}
         @else
             {{ __('Anunciar novo produto') }}
-        @endisset
+        @endif
     </h2>
 
     <div class="rounded-lg bg-white p-3 md:p-5">
@@ -20,6 +20,18 @@
             </div>
 
             <div class="w-full md:flex-1">
+                @if ($editMode === true)
+                    @can('delete', $product)
+                        <div class="mb-3 flex justify-end">
+                            <form action="{{ route('produto.destroy', $product) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <x-button>{{ __('Deletar produto') }}</x-button>
+                            </form>
+                        </div>
+                    @endcan
+                @endif
+
                 <form method="POST"
                     action="{{ $editMode ? route('produto.update', $product) : route('produto.store') }}"
                     class="flex flex-col items-start gap-4">

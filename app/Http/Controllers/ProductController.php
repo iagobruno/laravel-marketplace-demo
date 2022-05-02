@@ -35,7 +35,8 @@ class ProductController extends Controller
             'image_url' => 'https://photos.enjoei.com.br/moletom-essential-grey-59171462/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDA4MzA5OC9kNWI1NDliYjhiNjc1NjAwZWZkZDNjZGQ5YjkzM2JkMy5qcGc'
         ]);
 
-        return redirect()->route('produto.show', [$product]);
+        return redirect()->route('produto.show', [$product])
+            ->with('success', 'Produto criado!');
     }
 
     public function edit(Product $product, Request $request)
@@ -54,7 +55,8 @@ class ProductController extends Controller
 
         $product->update($request->validated());
 
-        return redirect()->route('produto.show', $product)->withoutFragment();
+        return redirect()->route('produto.show', $product)
+            ->with('success', 'Informações do produto foram atualizadas!');
     }
 
     public function destroy(Product $product)
@@ -63,6 +65,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('home');
+        return redirect()->route('home')
+            ->with('success', 'Produto deletado!');
     }
 }
