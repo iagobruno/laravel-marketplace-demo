@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Carbon\Carbon::setLocale('pt_BR');
+
+        Route::resourceVerbs([
+            'create' => __('criar'),
+            'edit' => __('editar'),
+        ]);
 
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
     }

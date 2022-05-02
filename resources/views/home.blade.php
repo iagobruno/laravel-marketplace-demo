@@ -5,7 +5,7 @@
 
     <div class="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
         @foreach ($products as $product)
-            <a href="{{ route('products.show', [$product->slug]) }}"
+            <a href="{{ route('produto.show', [$product->slug]) }}"
                 class="pt-[100%] rounded-md overflow-hidden relative group">
                 <div class="bg-white text-gray-900 text-sm rounded-md px-2 py-1 absolute top-2 right-2 z-[3]">
                     @isset($product->discount)

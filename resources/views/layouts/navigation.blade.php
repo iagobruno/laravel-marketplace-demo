@@ -22,9 +22,9 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6 space-x-2">
                 @auth
                     @if (auth()->user()->is_seller)
-                        {{-- <form action="{{ route('stripe.setup') }}" method="get"> --}}
-                        <x-button class="mr-3" type="submit">{{ __('Vender produto') }}</x-button>
-                        {{-- </form> --}}
+                        <form action="{{ route('produto.create') }}" method="get">
+                            <x-button class="mr-3" type="submit">{{ __('Vender produto') }}</x-button>
+                        </form>
                     @else
                         <form action="{{ route('stripe.setup') }}" method="get">
                             <x-button class="mr-3" type="submit">{{ __('Quero vender') }}</x-button>
