@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -17,6 +18,8 @@ class ProductController extends Controller
 
     public function create()
     {
+        Gate::allows('manage-products');
+
         return view('products.create');
     }
 
@@ -33,7 +36,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        //
+        Gate::allows('manage-products');
     }
 
     public function update(Product $product, Request $request)
@@ -43,6 +46,10 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        //
+        Gate::allows('manage-products');
+
+        $product->delete();
+
+        return redirect()->route('home');
     }
 }
