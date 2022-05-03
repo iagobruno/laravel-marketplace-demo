@@ -30,7 +30,7 @@ class Product extends Model
 
     public function seller()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
     /**
@@ -39,6 +39,11 @@ class Product extends Model
     public function scopeAvailable($query)
     {
         return $query->whereNull('bought_at');
+    }
+
+    public function calcApplicationFee()
+    {
+        return $this->amount * 0.2;
     }
 
     /**

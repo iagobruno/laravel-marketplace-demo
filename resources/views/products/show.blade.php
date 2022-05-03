@@ -26,7 +26,8 @@
                     @endisset
                 </div>
 
-                <form action="/" method="post" class="my-4">
+                <form action="{{ route('produto.purchase', $product) }}" method="POST" class="my-4">
+                    @csrf
                     <x-button :disabled="isset($product->bought_at)">{{ __('Comprar') }}</x-button>
                 </form>
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StripeController;
 
 /*
@@ -18,14 +19,16 @@ use App\Http\Controllers\StripeController;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::get('/produto/criar', [ProductController::class, 'create'])->middleware(['auth', 'only-sellers'])->name('produto.create');
 Route::get('/produto/{product}', [ProductController::class, 'show'])->name('produto.show');
-Route::post('/produto', [ProductController::class, 'store'])->middleware(['auth', 'only-sellers'])->name('produto.store');
-Route::get('/produto/{product}/editar', [ProductController::class, 'edit'])->middleware(['auth', 'only-sellers'])->name('produto.edit');
-Route::put('/produto/{product}', [ProductController::class, 'update'])->middleware(['auth', 'only-sellers'])->name('produto.update');
-Route::delete('/produto/{product}', [ProductController::class, 'destroy'])->middleware(['auth', 'only-sellers'])->name('produto.destroy');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/produto/criar', [ProductController::class, 'create'])->middleware('only-sellers')->name('produto.create');
+    Route::post('/produto', [ProductController::class, 'store'])->middleware('only-sellers')->name('produto.store');
+    Route::get('/produto/{product}/editar', [ProductController::class, 'edit'])->middleware('only-sellers')->name('produto.edit');
+    Route::put('/produto/{product}', [ProductController::class, 'update'])->middleware('only-sellers')->name('produto.update');
+    Route::delete('/produto/{product}', [ProductController::class, 'destroy'])->middleware('only-sellers')->name('produto.destroy');
+    Route::post('/produto/{product}/purchase', PurchaseController::class)->name('produto.purchase');
+
     Route::view('/stripe/setup', 'setup-stripe')->name('stripe.setup');
     Route::post('/stripe/redirect', [StripeController::class, 'redirect'])->name('stripe.redirect');
     Route::get('/stripe/callback', [StripeController::class, 'callback'])->name('stripe.callback');
