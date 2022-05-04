@@ -19,7 +19,6 @@ use App\Http\Controllers\StripeController;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::get('/produto/{product}', [ProductController::class, 'show'])->name('produto.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/produto/criar', [ProductController::class, 'create'])->middleware('only-sellers')->name('produto.create');
@@ -35,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/stripe/dashboard', [StripeController::class, 'dashboard'])->name('stripe.dashboard');
 });
 
+Route::get('/produto/{product}', [ProductController::class, 'show'])->name('produto.show');
 
 
 require __DIR__ . '/auth.php';

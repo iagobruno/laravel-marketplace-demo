@@ -57,7 +57,8 @@
 
                     <div class="w-full">
                         <x-label for="price" :value="__('Preço')" />
-                        <x-input id="price" class="mt-1 block" type="number" name="price" :value="old('price', $product->price ?? '0')" />
+                        <x-input id="price" class="mt-1 block" type="number" name="price" :value="old('price', ($product->price ?? 0) / 100)"
+                            step="1" />
                         @error('price')
                             <div class="mt-1 text-red-600">{{ $message }}</div>
                         @enderror

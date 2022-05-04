@@ -29,10 +29,12 @@ class ProductController extends Controller
     {
         Gate::authorize('create', Product::class);
 
+        $data = $request->validated();
         $product = Product::create([
-            ...$request->validated(),
+            ...$data,
+            'price' => $data['price'] * 100,
             'seller_id' => auth()->id(),
-            'image_url' => 'https://photos.enjoei.com.br/moletom-essential-grey-59171462/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDA4MzA5OC9kNWI1NDliYjhiNjc1NjAwZWZkZDNjZGQ5YjkzM2JkMy5qcGc'
+            'image_url' => 'https://photos.enjoei.com.br/moletom-essential-grey-59171462/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yMDA4MzA5OC9kNWI1NDliYjhiNjc1NjAwZWZkZDNjZGQ5YjkzM2JkMy5qcGc',
         ]);
 
         return redirect()->route('produto.show', [$product])
@@ -53,7 +55,11 @@ class ProductController extends Controller
     {
         Gate::authorize('update', $product);
 
-        $product->update($request->validated());
+        $data = $request->validated();
+        $product->update([
+            ...$data,
+            'price' => $data['price'] * 100,
+        ]);
 
         return redirect()->route('produto.show', $product)
             ->with('success', 'Informações do produto foram atualizadas!');

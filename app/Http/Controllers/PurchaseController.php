@@ -42,10 +42,9 @@ class PurchaseController extends Controller
                     'bought_at' => now(),
                 ]);
 
-                $amountInCents = $product->price * 100;
                 \Stripe\PaymentIntent::create([
                     'currency' => 'brl',
-                    'amount' => $amountInCents,
+                    'amount' => $product->price,
                     'application_fee_amount' => $product->calcApplicationFee(),
                     'transfer_data' => [
                         'destination' => $product->seller->stripe_account_id,
@@ -57,7 +56,7 @@ class PurchaseController extends Controller
                 ]);
             });
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             return redirect()->back()->withInput()->with([
                 'error' => 'Ocorreu um problema ao tentar processar o pagamento.',
             ]);

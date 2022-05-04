@@ -43,7 +43,13 @@ class Product extends Model
 
     public function calcApplicationFee()
     {
-        return $this->amount * 0.2;
+        $percent = 20;
+        return $this->price / 100 * $percent;
+    }
+
+    public function calcSellerAmount()
+    {
+        return $this->price - $this->calcApplicationFee();
     }
 
     /**
