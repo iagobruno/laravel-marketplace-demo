@@ -20,9 +20,6 @@ class ProductFactory extends Factory
             'title' => $this->faker->sentence(5),
             'description' => $this->faker->paragraph(6, false),
             'price' => $price,
-            'discount' => $this->faker->boolean()
-                ? $this->faker->numberBetween(1_00, $price)
-                : null,
             'size' => $this->faker->randomElement(['PP', 'P', 'M', 'G', 'GG', 'XG']),
             'condition' => $this->faker->randomElement(['novo', 'seminovo', 'usado']),
             'image_url' => $this->faker->randomElement([

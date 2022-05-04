@@ -18,7 +18,6 @@ class Product extends Model
         'description',
         'image_url',
         'price',
-        'discount',
         'condition',
         'size',
         'seller_id',

@@ -65,14 +65,6 @@
                     </div>
 
                     <div class="w-full">
-                        <x-label for="discount" :value="__('Desconto')" />
-                        <x-input id="discount" class="mt-1 block" type="number" name="discount" :value="old('discount', $product->discount ?? '')" />
-                        @error('discount')
-                            <div class="mt-1 text-red-600">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="w-full">
                         <x-label for="size" :value="__('Tamanho')" />
                         <x-select name="size" id="size">
                             @foreach (['', 'PP', 'P', 'M', 'G', 'GG', 'XG'] as $item)

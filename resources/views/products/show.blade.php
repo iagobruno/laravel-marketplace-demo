@@ -17,13 +17,7 @@
                 @endisset
                 <h2 class="mb-2 text-3xl font-bold">{{ $product->title }}</h2>
                 <div class="text-xl">
-                    @isset($product->discount)
-                        <span
-                            class="font-semibold text-green-500">{{ money($product->price - $product->discount) }}</span>
-                        <span class="text-base text-gray-400 line-through">{{ money($product->price) }}</span>
-                    @else
-                        <span>{{ money($product->price) }}</span>
-                    @endisset
+                    <span>{{ money($product->price) }}</span>
                 </div>
 
                 <form action="{{ route('produto.purchase', $product) }}" method="POST" class="my-4">

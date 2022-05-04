@@ -18,7 +18,6 @@ class StoreProductRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['sometimes'],
             'price' => ['required', 'numeric', 'min:0'],
-            'discount' => ['sometimes', 'numeric', 'min:0'],
             'size' => ['required', 'in:PP,P,M,G,GG,XG'],
             'condition' => ['required', 'in:novo,seminovo,usado'],
         ];
