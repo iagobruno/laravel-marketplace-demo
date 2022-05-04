@@ -39,7 +39,83 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function createTestCreditCard(string $code = null)
 {
-    // ..
+    $number = match ($code) {
+        'insufficient_funds' => '4000000000009995',
+        'expired' => '4000000000000069',
+        'card_declined' => '4000000000000002',
+        'incorrect_cvc' => '4000000000000127',
+        'incorrect_number' => '4242424242424241',
+        default => '4242424242424242'
+    };
+
+    return \Stripe\PaymentMethod::create([
+        'type' => 'card',
+        'card' => [
+            'number' => $number,
+            'exp_month' => 12,
+            'exp_year' => now()->addYear()->year,
+            'cvc' => '314',
+        ],
+    ]);
+}
+
+function createTestConnectAccount()
+{
+    return \Stripe\Account::create([
+        'type' => 'express',
+        'business_type' => 'individual',
+        'country' => 'BR',
+        'email' => 'test091w90uoijsoijsjask@gmail.com',
+        'individual' => [
+            'phone' => '+55 00 000000000',
+            'email' => 'test091w90uoijsoijsjask@gmail.com',
+            'first_name' => 'Lorem',
+            'last_name' => 'Ipsum',
+            'id_number' => '85701070050',
+            'dob' => [
+                'day' => 4,
+                'month' => 6,
+                'year' => 1990,
+            ],
+            'address' => [
+                'country' => 'BR',
+                'state' => 'Ceará',
+                'city' => 'Cidade dos funcionários',
+                'line1' => 'Rua Pedro Antônio de Melo',
+                'line2' => '3º Andar',
+                'postal_code' => 62375000,
+            ],
+            'verification' => [
+                // TODO: Criar um documento de teste para o Stripe ativar a conta pra receber pagamentos
+                'document' => [
+                    'back' => '',
+                    'front' => '',
+                ]
+            ],
+            'political_exposure' => 'none'
+        ],
+        'business_profile' => [
+            'mcc' => '5734',
+            'product_description' => 'Lorem ipsum dolor sit amet',
+            'url' => 'https://laravel.com/',
+        ],
+        'external_account' => [
+            'object' => 'bank_account',
+            'country' => 'BR',
+            'currency' => 'BRL',
+            'account_holder_name' => 'Lorem Ipsum',
+            'routing_number' => '110-0000',
+            'account_number' => '0001234'
+        ],
+        'capabilities' => [
+            'card_payments' => ['requested' => true],
+            'transfers' => ['requested' => true],
+        ],
+        // 'tos_acceptance' => [
+        //     'date' => now()->timestamp,
+        //     'ip' => '186.225.55.146'
+        // ],
+    ]);
 }
