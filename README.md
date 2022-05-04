@@ -2,6 +2,8 @@
 
 Um simples brechó virtual para venda e compra de roupas feito com Laravel + [Stripe connect](https://stripe.com/br/connect).
 
+![](./tour.gif)
+
 ## Run Locally
 
 Clone this repo and run commands in the order below:
