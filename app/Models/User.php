@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany(Product::class, 'seller_id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Product::class, 'buyer_id');
+    }
+
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;

@@ -12,6 +12,7 @@
 
             <x-button type="submit" class="mx-auto mt-4">Adicionar método de pagamento</x-button>
             @csrf
+            @method('POST')
         </form>
     </div>
 
